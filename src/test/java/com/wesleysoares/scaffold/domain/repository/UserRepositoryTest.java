@@ -37,7 +37,7 @@ class UserRepositoryTest
     public void find_UserByName_WhenSuccessful()
     {
         User userToBeSaved = userRepository.save(UserManager.createUser());
-        User userFindByName = userRepository.findByName("Wesley").get();
+        User userFindByName = userRepository.findById("1").get();
 
         Assertions.assertThat(userFindByName).isNotNull();
         Assertions.assertThat(userFindByName.getName()).isEqualTo("Wesley");
@@ -48,8 +48,6 @@ class UserRepositoryTest
     public void put_UserById_WhenSuccessful()
     {
         User userToBeSaved = userRepository.save(UserManager.createUser());
-        User userToBeChanged = userRepository.findByName("Wesley").get();
-        userToBeSaved.setId(userToBeChanged.getId());
         userToBeSaved.setName("Leticia");
 
         User userSaved = userRepository.save(userToBeSaved);
@@ -74,7 +72,7 @@ class UserRepositoryTest
     {
         User userToBeDeleted = userRepository.save(UserManager.createUser());
         userRepository.delete(userToBeDeleted);
-        Optional<User> userToBeSearch = userRepository.findByName(userToBeDeleted.getName());
+        Optional<User> userToBeSearch = userRepository.findById(userToBeDeleted.getId());
 
         Assertions.assertThat(userToBeSearch.isEmpty()).isTrue();
     }

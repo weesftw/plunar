@@ -25,11 +25,6 @@ public class UserService
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id + " id not found."));
     }
 
-    public User findByName(String name)
-    {
-        return userRepository.findByName(name).orElseThrow(() -> new UserNotFoundException(name + " not found."));
-    }
-
     @Transactional
     public User save(User user)
     {

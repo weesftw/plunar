@@ -39,7 +39,6 @@ class UserControllerTest
         BDDMockito.when(userService.findAll()).thenReturn(Arrays.asList(UserManager.createUserWithId()));
         BDDMockito.when(userService.save(ArgumentMatchers.any())).thenReturn(UserManager.createUserWithId());
         BDDMockito.when(userService.findById(ArgumentMatchers.anyString())).thenReturn(UserManager.createUserWithId());
-        BDDMockito.when(userService.findByName(ArgumentMatchers.anyString())).thenReturn(UserManager.createUserWithId());
         BDDMockito.doNothing().when(userService).deleteById(ArgumentMatchers.anyString());
     }
 
@@ -65,5 +64,32 @@ class UserControllerTest
 
         Assertions.assertThat(userSaved).isNotNull();
         Assertions.assertThat(userSaved.getId()).isEqualTo(idExpected);
+    }
+
+    @Test
+    @DisplayName("Find by id when successful")
+    public void findByID_WhenSuccessful()
+    {
+        UserRequest userToBeSaved = modelMapper.map(UserManager.createUser(), UserRequest.class);
+        User userSaved = userController.post(userToBeSaved).getBody();
+        User userToBeSearchById = userController.get(userSaved.getId()).getBody();
+
+        Assertions.assertThat(userToBeSearchById).isNotNull();
+        Assertions.assertThat(userToBeSearchById.getId()).isEqualTo("1");
+        Assertions.assertThat(userToBeSearchById.getName()).isEqualTo(userSaved.getName());
+    }
+
+    @Test
+    @DisplayName("Delete user by id when successful")
+    public void delete_UserByID_WhenSuccessful()
+    {
+        UserRequest userToBeSaved = modelMapper.map(UserManager.createUser(), UserRequest.class);
+        User userSaved = userController.post(userToBeSaved).getBody();
+
+        userController.delete(userSaved.getId());
+
+        User userSearchAfterDeleted = userController.get(userSaved.getId()).getBody();
+
+        Assertions.assertThat(userSearchAfterDeleted).isNull();
     }
 }
