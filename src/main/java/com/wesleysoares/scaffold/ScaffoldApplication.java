@@ -1,13 +1,13 @@
-package com.wesleysoares.scarffold;
+package com.wesleysoares.scaffold;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ScarffoldApplication {
+public class ScaffoldApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ScarffoldApplication.class, args);
+		SpringApplication.run(ScaffoldApplication.class, args);
 	}
 
 }
