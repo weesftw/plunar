@@ -1,21 +1,27 @@
 package com.wesleysoares.scaffold.util;
 
+import com.wesleysoares.scaffold.api.request.UserRequest;
 import com.wesleysoares.scaffold.domain.model.User;
 
 public class UserManager
 {
     public static User createUser()
     {
-        return new User().builder().name("Wesley").build();
+        return User.builder().name("Wesley").build();
+    }
+
+    public static UserRequest createUserRequest()
+    {
+        return UserRequest.builder().name("Wesley").build();
     }
 
     public static User createUserWithId()
     {
-        return new User().builder().id("1").name("Wesley").build();
+        return User.builder().id("1").name("Wesley").build();
     }
 
-    public static User createUserForUpdate()
+    public static User createUserUpdated()
     {
-        return new User().builder().id("1").name("Wesley Silva").build();
+        return User.builder().id("1").name("Leticia").build();
     }
 }

@@ -1,25 +1,40 @@
 package com.wesleysoares.scaffold.api.controller;
 
 import com.wesleysoares.scaffold.api.request.UserRequest;
+import com.wesleysoares.scaffold.api.request.UserResponse;
 import com.wesleysoares.scaffold.domain.model.User;
 import com.wesleysoares.scaffold.domain.service.UserService;
 import com.wesleysoares.scaffold.util.UserManager;
-import org.assertj.core.api.Assertions;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class UserControllerTest
@@ -30,66 +45,23 @@ class UserControllerTest
     @Mock
     private UserService userService;
 
-    @Mock
-    private ModelMapper modelMapper;
+    private MockMvc mockMvc;
 
     @BeforeEach
-    public void setup()
+    public void init()
     {
-        BDDMockito.when(userService.findAll()).thenReturn(Arrays.asList(UserManager.createUserWithId()));
-        BDDMockito.when(userService.save(ArgumentMatchers.any())).thenReturn(UserManager.createUserWithId());
-        BDDMockito.when(userService.findById(ArgumentMatchers.anyString())).thenReturn(UserManager.createUserWithId());
-        BDDMockito.doNothing().when(userService).deleteById(ArgumentMatchers.anyString());
+        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
     @Test
-    @DisplayName("Find all users and return when successful")
-    public void findAll_ReturnListUser_WhenSuccessful()
+    @DisplayName("getIndex returns list of users when successful")
+    public void getIndex_ReturnOk_WhenSuccessful() throws Exception
     {
-        List<User> listReturned = userController.getAll().getBody();
-        User userToGetName = UserManager.createUser();
+        ResultActions resultActions = mockMvc.perform(get("/"));
 
-        Assertions.assertThat(listReturned).isNotNull();
-        Assertions.assertThat(listReturned.size()).isEqualTo(1);
-        Assertions.assertThat(listReturned.get(0).getName()).isEqualTo(userToGetName.getName());
-    }
-
-    @Test
-    @DisplayName("Create user when successful")
-    public void create_User_WhenSuccessful()
-    {
-        String idExpected = UserManager.createUserWithId().getId();
-        UserRequest userToBeSaved = modelMapper.map(UserManager.createUser(), UserRequest.class);
-        User userSaved = userController.post(userToBeSaved).getBody();
-
-        Assertions.assertThat(userSaved).isNotNull();
-        Assertions.assertThat(userSaved.getId()).isEqualTo(idExpected);
-    }
-
-    @Test
-    @DisplayName("Find by id when successful")
-    public void findByID_WhenSuccessful()
-    {
-        UserRequest userToBeSaved = modelMapper.map(UserManager.createUser(), UserRequest.class);
-        User userSaved = userController.post(userToBeSaved).getBody();
-        User userToBeSearchById = userController.get(userSaved.getId()).getBody();
-
-        Assertions.assertThat(userToBeSearchById).isNotNull();
-        Assertions.assertThat(userToBeSearchById.getId()).isEqualTo("1");
-        Assertions.assertThat(userToBeSearchById.getName()).isEqualTo(userSaved.getName());
-    }
-
-    @Test
-    @DisplayName("Delete user by id when successful")
-    public void delete_UserByID_WhenSuccessful()
-    {
-        UserRequest userToBeSaved = modelMapper.map(UserManager.createUser(), UserRequest.class);
-        User userSaved = userController.post(userToBeSaved).getBody();
-
-        userController.delete(userSaved.getId());
-
-        User userSearchAfterDeleted = userController.get(userSaved.getId()).getBody();
-
-        Assertions.assertThat(userSearchAfterDeleted).isNull();
+        resultActions
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("users", hasSize(0)))
+                .andExpect(status().isOk());
     }
 }

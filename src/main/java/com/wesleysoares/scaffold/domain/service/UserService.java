@@ -22,7 +22,9 @@ public class UserService
 
     public User findById(String id)
     {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id + " id not found."));
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new UserNotFoundException("ID: " + id + " not found."));
     }
 
     @Transactional
@@ -33,6 +35,11 @@ public class UserService
 
     public void deleteById(String id)
     {
-        userRepository.deleteById(id);
+        userRepository.delete(findById(id));
+    }
+
+    public void delete(User user)
+    {
+        userRepository.delete(user);
     }
 }

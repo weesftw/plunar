@@ -1,59 +1,57 @@
 package com.wesleysoares.scaffold.api.controller;
 
 import com.wesleysoares.scaffold.api.request.UserRequest;
-import com.wesleysoares.scaffold.api.request.UserResponse;
 import com.wesleysoares.scaffold.domain.model.User;
 import com.wesleysoares.scaffold.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.List;
 
-@RestController
+@Controller
 @AllArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/")
 public class UserController
 {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> get(@PathVariable String id)
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
-    }
-
     @GetMapping
-    public ResponseEntity<List<User>> getAll()
+    public ModelAndView get()
     {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+        return new ModelAndView("index")
+                .addObject("user", new UserRequest())
+                .addObject("users", userService.findAll());
     }
 
-    @PostMapping
-    public ResponseEntity<User> post(@RequestBody @Valid UserRequest userRequest)
+    @PostMapping("/")
+    public ModelAndView post(@Valid UserRequest userRequest, BindingResult errors)
     {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(toEntity(userRequest)));
+        if(!errors.hasErrors())
+            userService.save(toEntity(userRequest));
+
+        return new ModelAndView("index");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> put(@PathVariable String id, @RequestBody @Valid UserRequest userRequest)
+    public ModelAndView put(@PathVariable String id, @Valid User user, BindingResult errors)
     {
-        User user = toEntity(userRequest);
-        user.setId(id);
+        if(!errors.hasErrors())
+            userService.save(user);
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+        return new ModelAndView("index");
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id)
+    @DeleteMapping("/")
+    public ModelAndView delete(User user)
     {
-        userService.deleteById(id);
+        userService.delete(user);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return new ModelAndView("index");
     }
 
     private User toEntity(UserRequest userRequest)
