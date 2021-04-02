@@ -6,6 +6,7 @@ import com.wesleysoares.scaffold.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +25,20 @@ public class UserController
     public ModelAndView get()
     {
         return new ModelAndView("index")
-                .addObject("user", new UserRequest())
+                .addObject("createUser", new UserRequest())
+                .addObject("user", new User())
                 .addObject("users", userService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public User getUser(@PathVariable String id)
+    {
+        User user = userService.findById(id);
+
+        System.out.println(user);
+
+        return user;
     }
 
     @PostMapping("/")
@@ -34,24 +47,24 @@ public class UserController
         if(!errors.hasErrors())
             userService.save(toEntity(userRequest));
 
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/update/{id}")
     public ModelAndView put(@PathVariable String id, @Valid User user, BindingResult errors)
     {
-        if(!errors.hasErrors())
+        if(user != null)
             userService.save(user);
 
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
 
-    @DeleteMapping("/")
+    @PostMapping("/delete/{id}")
     public ModelAndView delete(User user)
     {
         userService.delete(user);
 
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
 
     private User toEntity(UserRequest userRequest)

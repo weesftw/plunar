@@ -4,6 +4,97 @@
 
 </head>
 <body>
-    <nav th:replace="fragments/common :: nav"></nav>
+    <header>
+        <nav th:replace="fragments/common :: nav"></nav>
+    </header>
+    <main>
+        <section>
+            <button type="button" onclick="onModal(this.id)" id="create">New</button>
+        </section>
+        <article>
+            <table>
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td class="large">Name</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.name}"></td>
+                        <td>
+                            <div class="table-container">
+                                <button id="edit" onclick="onModal(this.id, this.value)" th:value="${user.id}">
+                                    <span class="material-icons">edit</span>
+                                </button>
+                                <button onclick="onModal(this.id, this.value)" id="delete" th:value="${user.id}"
+                                        th:href="@{/delete/{id} (id=${user.id})}">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </main>
+    <div id="createModal" class="modal">
+        <div>
+            <button type="button" onclick="onModal(this.id)" class="closeModal" id="createCloseModal">X</button>
+            <form method="post" th:action="@{/}" th:object="${createUser}">
+                <h1>CREATE NEW USER</h1>
+                <ol>
+                    <li>
+                        <label for="create_name">Name:</label>
+                    </li>
+                    <li>
+                        <input type="text" id="create_name" placeholder="Insert your name here." th:field="*{name}">
+                    </li>
+                    <li>
+                        <button type="submit">Submit</button>
+                    </li>
+                </ol>
+            </form>
+        </div>
+    </div>
+    <div id="editModal" class="modal">
+        <div>
+            <button type="button" class="closeModal" id="editCloseModal">X</button>
+            <form method="post" th:action="@{|/update/*{id}|}" th:object="${user}">
+                <h1>EDIT USER: <span th:text="*{name}"></span></h1>
+                <input type="hidden" id="edit_id" th:field="*{id}" th:value="*{id}" />
+                <ol>
+                    <li>
+                        <label for="edit_name">Name:</label>
+                    </li>
+                    <li>
+                        <input type="text" id="edit_name" th:field="*{name}" th:value="*{name}">
+                    </li>
+                    <li>
+                        <button type="submit">Submit</button>
+                    </li>
+                </ol>
+            </form>
+        </div>
+    </div>
+    <div id="deleteModal" class="modal">
+        <div>
+            <button type="button" class="closeModal" id="deleteCloseModal">X</button>
+            <form method="post" th:action="@{|/delete/*{id}|}" th:object="${user}">
+                <h1>DELETE USER: <span id="delete_name"></span></h1>
+                <input type="hidden" id="delete_id" th:field="*{id}" />
+                <ol>
+                    <li>
+                        <label>Ok?</label>
+                    </li>
+                    <li>
+                        <button type="submit">Submit</button>
+                    </li>
+                </ol>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

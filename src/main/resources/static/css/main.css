@@ -1,0 +1,203 @@
+*
+{
+    font-size: 16px;
+    font-family: Arial;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+nav
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+
+    box-shadow: 0.1rem 0.3rem 2rem 0.122rem #e1e1e1;
+    background-color: #282828;
+    padding: 1rem;
+}
+
+nav li
+{
+    list-style: none;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+nav a
+{
+    color: #ffffff;
+}
+
+main
+{
+    padding-top: 5rem;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 40%;
+}
+
+section button
+{
+    background-color: #0079e9;
+    border: 0px;
+    border-radius: 4px;
+    padding: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+article
+{
+    margin-top: 0.654rem;
+}
+
+article table
+{
+    border: 0.01rem solid #000000;
+    border-collapse: collapse;
+}
+
+table thead
+{
+    background-color: #000;
+    font-weight: bolder;
+    color: #fff;
+}
+
+table tr, td
+{
+    border: 0.01rem solid #000000;
+    padding: 0.8rem;
+}
+
+table .large
+{
+    width: 100%;
+}
+
+table .table-container
+{
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+}
+
+table button
+{
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+table button:focus
+{
+    outline: 0;
+}
+
+.modal
+{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity: 0;
+    overflow: auto;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.modal > div
+{
+    width: 30%;
+    position: relative;
+    margin: 10% auto;
+    padding: 15px 20px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.modal .closeModal
+{
+    position: absolute;
+    width: 30px;
+    right: -15px;
+    top: -20px;
+    margin-top: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #b00013;
+}
+
+.modal h1
+{
+    padding: 1rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.09rem;
+}
+
+.modal li
+{
+    list-style: none;
+    padding: 0.1rem;
+}
+.modal button
+{
+    margin-top: 0.9rem;
+    background-color: #282828;
+    border: 0px;
+    border-radius: 4px;
+    padding: 0.54rem;
+    font-weight: 600;
+    font-size: 0.93rem;
+    color: #fff;
+}
+
+.modal button:focus
+{
+    outline: 0;
+}
+
+.modal input
+{
+    width: 50%;
+    padding: 0.5rem;
+}
+
+.modal label
+{
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1024px)
+{
+    nav
+    {
+        justify-content: center;
+    }
+
+    main
+    {
+        width: 95%;
+    }
+
+    .modal > div
+    {
+        width: 60%;
+    }
+}
