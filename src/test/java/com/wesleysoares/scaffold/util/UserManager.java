@@ -10,11 +10,6 @@ public class UserManager
         return User.builder().name("Wesley").build();
     }
 
-    public static UserRequest createUserRequest()
-    {
-        return UserRequest.builder().name("Wesley").build();
-    }
-
     public static User createUserWithId()
     {
         return User.builder().id("1").name("Wesley").build();

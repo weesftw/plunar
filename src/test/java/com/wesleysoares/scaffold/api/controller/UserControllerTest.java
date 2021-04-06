@@ -1,40 +1,30 @@
 package com.wesleysoares.scaffold.api.controller;
 
 import com.wesleysoares.scaffold.api.request.UserRequest;
-import com.wesleysoares.scaffold.api.request.UserResponse;
 import com.wesleysoares.scaffold.domain.model.User;
 import com.wesleysoares.scaffold.domain.service.UserService;
 import com.wesleysoares.scaffold.util.UserManager;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Arrays;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.isA;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 class UserControllerTest
@@ -51,17 +41,66 @@ class UserControllerTest
     public void init()
     {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        BDDMockito.when(userService.findAll()).thenReturn(Arrays.asList(UserManager.createUserWithId()));
+        BDDMockito.when(userService.findById(ArgumentMatchers.anyString())).thenReturn(UserManager.createUserWithId());
     }
 
     @Test
-    @DisplayName("getIndex returns list of users when successful")
-    public void getIndex_ReturnOk_WhenSuccessful() throws Exception
+    @DisplayName("get returns list of users when successful")
+    public void get_ReturnOk_WhenSuccessful() throws Exception
     {
         ResultActions resultActions = mockMvc.perform(get("/"));
 
         resultActions
                 .andExpect(view().name("index"))
-                .andExpect(model().attribute("users", hasSize(0)))
+                .andExpect(model().attribute("users", hasSize(1)))
+                .andExpect(model().attribute("user", isA(User.class)))
+                .andExpect(model().attribute("createUser", isA(UserRequest.class)))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("getUser returns users when successful")
+    public void getUser_ReturnUser_WhenSuccessful() throws Exception
+    {
+        ResultActions resultActions = mockMvc.perform(get("/{id}", "1"));
+
+        resultActions
+                .andExpect(jsonPath("$.id").value("1"))
+                .andExpect(jsonPath("$.name").value("Wesley"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("post returns users when successful")
+    public void post_ReturnOk_WhenSuccessful() throws Exception
+    {
+        ResultActions resultActions = mockMvc.perform(post("/", UserManager.createUser()));
+
+        resultActions
+                .andExpect(view().name("redirect:/"))
+                .andExpect(status().is3xxRedirection());
+    }
+    @Test
+    @DisplayName("post returns users when successful")
+    public void update_ReturnRedirect_WhenSuccessful() throws Exception
+    {
+        ResultActions resultActions = mockMvc.perform(post("/update/{id}", "1"));
+
+        resultActions
+                .andExpect(view().name("redirect:/"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("post returns users when successful")
+    public void delete_ReturnRedirect_WhenSuccessful() throws Exception
+    {
+        ResultActions resultActions = mockMvc.perform(post("/delete/{id}", "1"));
+
+        resultActions
+                .andExpect(view().name("redirect:/"))
+                .andExpect(status().is3xxRedirection());
     }
 }

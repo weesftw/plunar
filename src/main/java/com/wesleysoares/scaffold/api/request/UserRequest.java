@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 public class UserRequest
 {
     @NotBlank(message = "Name cannot be empty.")
-    @Size(min = 3, message = "Name cannot be < than 3")
+    @Size(min = 3, message = "Name cannot be < than 3 characters.")
+    @Size(max = 255, message = "Name cannot be > than 255 characters.")
     private String name;
 }

@@ -54,9 +54,39 @@ section button
     color: #fff;
 }
 
+.alert
+{
+    background-color: #b00013;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 3rem;
+}
+
+.alert h2
+{
+    text-align: center;
+    color: #fff;
+    padding: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.09rem;
+}
+
+.alert p
+{
+    color: #fff;
+    text-align: center;
+}
+
 article
 {
     margin-top: 0.654rem;
+}
+
+article p
+{
+    text-align: right;
+    font-size: 0.678rem;
 }
 
 article table
@@ -70,6 +100,11 @@ table thead
     background-color: #000;
     font-weight: bolder;
     color: #fff;
+}
+
+table tbody
+{
+    word-break: break-all;
 }
 
 table tr, td

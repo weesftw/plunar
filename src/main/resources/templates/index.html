@@ -8,8 +8,12 @@
         <nav th:replace="fragments/common :: nav"></nav>
     </header>
     <main>
+        <section class="alert" th:if="${exception}">
+            <h2>Errors has found: </h2>
+            <p th:text="${exception}">Name Error</p>
+        </section>
         <section>
-            <button type="button" onclick="onModal(this.id)" id="create">New</button>
+            <button type="button" onclick="onCreate(this.id)" id="create">New</button>
         </section>
         <article>
             <table>
@@ -26,10 +30,10 @@
                         <td th:text="${user.name}"></td>
                         <td>
                             <div class="table-container">
-                                <button id="edit" onclick="onModal(this.id, this.value)" th:value="${user.id}">
+                                <button id="edit" onclick="onCreate(this.id, this.value)" th:value="${user.id}">
                                     <span class="material-icons">edit</span>
                                 </button>
-                                <button onclick="onModal(this.id, this.value)" id="delete" th:value="${user.id}"
+                                <button id="delete" onclick="onCreate(this.id, this.value)" th:value="${user.id}"
                                         th:href="@{/delete/{id} (id=${user.id})}">
                                     <span class="material-icons">delete</span>
                                 </button>
@@ -39,10 +43,13 @@
                 </tbody>
             </table>
         </article>
+        <article>
+            <p>Made by Wesley Soares.</p>
+        </article>
     </main>
     <div id="createModal" class="modal">
         <div>
-            <button type="button" onclick="onModal(this.id)" class="closeModal" id="createCloseModal">X</button>
+            <button type="button" onclick="onCreate(this.id)" class="closeModal" id="createCloseModal">X</button>
             <form method="post" th:action="@{/}" th:object="${createUser}">
                 <h1>CREATE NEW USER</h1>
                 <ol>
@@ -81,7 +88,7 @@
     </div>
     <div id="deleteModal" class="modal">
         <div>
-            <button type="button" class="closeModal" id="deleteCloseModal">X</button>
+            <button type="button" onclick="onCreate(this.id)" class="closeModal" id="deleteCloseModal">X</button>
             <form method="post" th:action="@{|/delete/*{id}|}" th:object="${user}">
                 <h1>DELETE USER: <span id="delete_name"></span></h1>
                 <input type="hidden" id="delete_id" th:field="*{id}" />
@@ -90,7 +97,7 @@
                         <label>Ok?</label>
                     </li>
                     <li>
-                        <button type="submit">Submit</button>
+                        <button type="submit">Yes</button>
                     </li>
                 </ol>
             </form>

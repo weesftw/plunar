@@ -5,13 +5,16 @@ import com.wesleysoares.scaffold.domain.model.User;
 import com.wesleysoares.scaffold.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -36,25 +39,31 @@ public class UserController
     {
         User user = userService.findById(id);
 
-        System.out.println(user);
-
         return user;
     }
 
     @PostMapping("/")
-    public ModelAndView post(@Valid UserRequest userRequest, BindingResult errors)
+    public ModelAndView post(@Valid UserRequest userRequest, BindingResult errors, RedirectAttributes redirectAttributes)
     {
         if(!errors.hasErrors())
             userService.save(toEntity(userRequest));
+        else
+            redirectAttributes.addFlashAttribute("exception", errors.getAllErrors().stream()
+                    .map(x -> x.getDefaultMessage())
+                    .collect(Collectors.toList()));
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/", HttpStatus.OK);
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView put(@PathVariable String id, @Valid User user, BindingResult errors)
+    public ModelAndView put(@PathVariable String id, @Valid User user, BindingResult errors, RedirectAttributes redirectAttributes)
     {
-        if(user != null)
+        if(user != null && !errors.hasErrors())
             userService.save(user);
+        else
+            redirectAttributes.addFlashAttribute("exception", errors.getAllErrors().stream()
+                    .map(x -> x.getDefaultMessage())
+                    .collect(Collectors.toList()));
 
         return new ModelAndView("redirect:/");
     }
