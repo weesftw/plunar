@@ -69,7 +69,7 @@
     <div id="editModal" class="modal">
         <div>
             <button type="button" class="closeModal" id="editCloseModal">X</button>
-            <form method="post" th:action="@{|/update/*{id}|}" th:object="${user}">
+            <form method="post" th:action="@{|/*{id}|}" th:object="${user}">
                 <h1>EDIT USER: <span th:text="*{name}"></span></h1>
                 <input type="hidden" id="edit_id" th:field="*{id}" th:value="*{id}" />
                 <ol>

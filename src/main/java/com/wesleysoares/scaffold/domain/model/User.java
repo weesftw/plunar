@@ -25,5 +25,6 @@ public class User
 
     @NotBlank(message = "Name cannot be empty.")
     @Size(min = 3, message = "Name cannot be < than 3")
+    @Size(max = 255, message = "Name cannot be > than 255 characters.")
     private String name;
 }

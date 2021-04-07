@@ -55,7 +55,7 @@ public class UserController
         return new ModelAndView("redirect:/", HttpStatus.OK);
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/{id}")
     public ModelAndView put(@PathVariable String id, @Valid User user, BindingResult errors, RedirectAttributes redirectAttributes)
     {
         if(user != null && !errors.hasErrors())
