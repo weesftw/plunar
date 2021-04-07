@@ -3,12 +3,12 @@
 </h1>
 
 <h1 align="center">
-    <img src="https://ik.imagekit.io/do87d6wa1/scaffold_lpara_AsD.gif">
+    <img src="https://ik.imagekit.io/do87d6wa1/scaffold_AWMlWH5aC7.gif">
 </h1>
 
 ## ⚫ About
 
-Project made with purpose of create an **scaffold** (crud) for managment of names.
+Project made with purpose of create an **scaffold** (crud) for management of names.
 
 ## 🚀 Technology
 
