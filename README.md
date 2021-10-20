@@ -1,21 +1,14 @@
-<h1 align="center">
-    Scaffold
-</h1>
+# scaffold
+A simple scaffold (crud) website.
 
-<h1 align="center">
-    <img src="https://ik.imagekit.io/do87d6wa1/scaffold_AWMlWH5aC7.gif">
-</h1>
+## About
+<img src="https://ik.imagekit.io/do87d6wa1/scaffold_AWMlWH5aC7.gif" width=500>
 
-## ⚫ About
+## Authors
+| [<img src="https://github.com/weesftw.png?size=115" width=115><br><sub>@weesftw</sub>](https://github.com/weesftw) |
+| :---: |
 
-Project made with purpose of create an **scaffold** (crud) for management of names.
-
-## 🚀 Technology
-
+## Technology
 - [H2](https://www.h2database.com/html/main.html)
 - [Spring](https://spring.io/)
 - [Thymeleaf](https://www.thymeleaf.org/)
-
----
-
-Made 🤓 by Wesley Soares
