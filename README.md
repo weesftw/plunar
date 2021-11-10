@@ -9,6 +9,7 @@ A simple scaffold (crud) website.
 | :---: |
 
 ## Technology
+- [Gradle](https://gradle.org/)
 - [H2](https://www.h2database.com/html/main.html)
 - [Spring](https://spring.io/)
 - [Thymeleaf](https://www.thymeleaf.org/)
