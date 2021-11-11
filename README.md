@@ -1,5 +1,5 @@
 # scaffold
-A simple scaffold (crud) website.
+A scaffold (CRUD) website.
 
 ## About
 <img src="https://ik.imagekit.io/do87d6wa1/scaffold_AWMlWH5aC7.gif" width=500>
