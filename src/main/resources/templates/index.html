@@ -10,30 +10,21 @@
         <header class="rounded-bottom container mb-3"></header>
         <main>
             <div class="row">
-                <div class="col">
-                    <div class="card shadow">
-                        <div class="card-header text-center fw-bolder">
-                            Sign in
+                <div class="col d-flex justify-content-center">
+                    <div class="card col-lg-5 shadow text-center">
+                        <div class="card-header fw-bolder">
+                            Members
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-center">
-                                <form th:object="${loginDTO}" method="POST" action="/login">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" aria-describedby="emailHelp">
-                                        <div class="invalid-feedback" th:errors="*{email}"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control">
-                                        <div id="emailHelp" class="form-text">We'll never share your password with anyone else.</div>
-                                        <div class="invalid-feedback" th:errors="*{password}"></div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign In</button>
-                                </form>
+                            <div class="counter-box colored">
+                                <i class="bi bi-people-fill"></i>
+                                <p><span class="counter fw-bold">9999</span> Members Registered</br>
+                                    To go to the moon with us.
+                                </p>
                             </div>
+                            <button class="btn btn-danger fw-bold">Register Now</button>
                         </div>
-                        <div class="card-footer text-muted text-end"></div>
+                        <div class="card-footer text-muted text-end">Last update: 2 days ago</div>
                     </div>
                 </div>
             </div>
