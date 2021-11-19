@@ -1,9 +1,8 @@
 package com.weesftw.scaffold.api.controller;
 
-import com.weesftw.scaffold.api.dto.UserDTO;
-import com.weesftw.scaffold.domain.model.User;
+import com.weesftw.scaffold.api.dto.MemberDTO;
+import com.weesftw.scaffold.domain.model.Member;
 import com.weesftw.scaffold.domain.repository.MemberRepository;
-import com.weesftw.scaffold.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -18,30 +17,30 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/user")
-public class UserController
+@RequestMapping("/member")
+public class MemberController
 {
     private final ModelMapper modelMapper;
-    private final UserRepository repository;
+    private final MemberRepository repository;
 
     @GetMapping
-    public ModelAndView getIndex(UserDTO userDTO)
+    public ModelAndView getIndex(MemberDTO memberDTO)
     {
-        return new ModelAndView("user/index");
+        return new ModelAndView("member/index");
     }
 
     @PostMapping
-    public ModelAndView postMember(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result)
+    public ModelAndView postMember(@Valid @ModelAttribute("memberDTO") MemberDTO memberDTO, BindingResult result)
     {
         if(result.hasErrors())
-            return new ModelAndView("user/index");
+            return new ModelAndView("member/index");
 
-        repository.save(toEntity(userDTO));
+        repository.save(toEntity(memberDTO));
         return new ModelAndView("dashboard/index");
     }
 
-    private User toEntity(UserDTO userDTO)
+    private Member toEntity(MemberDTO memberDTO)
     {
-        return modelMapper.map(userDTO, User.class);
+        return modelMapper.map(memberDTO, Member.class);
     }
 }

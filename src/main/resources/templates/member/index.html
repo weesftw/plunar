@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | Member</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="~{/fragments/main :: navbar}"></nav>
+<div class="container pb-5">
+    <header class="rounded-bottom container mb-3"></header>
+    <main>
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header text-center fw-bolder">
+                        New Member
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <form th:object="${memberDTO}" method="POST" action="/member">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" aria-describedby="emailHelp">
+                                    <div class="invalid-feedback" th:errors="*{firstName}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input th:field="*{lastName}" th:errorclass="is-invalid" type="text" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{lastName}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{email}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phoneNumber" class="form-label">Phone</label>
+                                    <input th:field="*{phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="zipCode" class="form-label">Zip Code</label>
+                                    <input th:field="*{zipCode}" th:errorclass="is-invalid" type="text" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{zipCode}"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="reason" class="form-label">Reason</label>
+                                    <textarea th:field="*{reason}" th:errorclass="is-invalid" type="text" class="form-control"></textarea>
+                                    <div class="invalid-feedback" th:errors="*{reason}"></div>
+                                </div>
+                                <a type="submit" href="/dashboard/index" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted text-end"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="~{fragments/main :: footer}"></footer>
+<div th:replace="~{fragments/main :: script}"></div>
+</body>
+</html>

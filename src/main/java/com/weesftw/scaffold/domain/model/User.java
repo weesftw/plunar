@@ -1,30 +1,28 @@
 package com.weesftw.scaffold.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Table;
+import java.util.UUID;
 
 @Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "users")
 public class User
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private UUID uuid;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String description;
+    private String zipCode;
 
-    @NotBlank(message = "Name cannot be empty.")
-    @Size(min = 3, message = "Name cannot be < than 3")
-    @Size(max = 255, message = "Name cannot be > than 255 characters.")
-    private String name;
+    @Column(unique = true)
+    private String username;
+    private String password;
 }

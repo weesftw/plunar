@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>Plunar | Member</title>
+    <title>Plunar | Login</title>
     <div th:replace="~{/fragments/main :: head}"></div>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <form th:object="${loginDTO}" method="POST" action="/login">
+                                <form th:object="${userDTO}" method="POST" action="/login">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email Address</label>
                                         <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" aria-describedby="emailHelp">

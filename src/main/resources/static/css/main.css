@@ -1,238 +1,96 @@
-*
+@media (min-width: 576px)
 {
-    font-size: 16px;
-    font-family: Arial;
-
-    margin: 0px;
-    padding: 0px;
+    .navbar-spacing
+    {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 }
 
-nav
+.text-limit
 {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-
-    box-shadow: 0.1rem 0.3rem 2rem 0.122rem #e1e1e1;
-    background-color: #282828;
-    padding: 1rem;
+    max-width: 20ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-nav li
-{
-    list-style: none;
-}
-
-a
-{
-    text-decoration: none;
-}
-
-nav a
-{
-    color: #ffffff;
-}
-
-main
-{
-    padding-top: 5rem;
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
-    width: 40%;
-}
-
-section button
-{
-    background-color: #0079e9;
-    border: 0px;
-    border-radius: 4px;
-    padding: 1rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.alert
-{
-    background-color: #b00013;
-    border: 1px solid #000;
-    border-radius: 5px;
-    padding: 1rem;
-    margin-bottom: 3rem;
-}
-
-.alert h2
-{
-    text-align: center;
-    color: #fff;
-    padding: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.09rem;
-}
-
-.alert p
-{
-    color: #fff;
-    text-align: center;
-}
-
-article
-{
-    margin-top: 0.654rem;
-}
-
-article p
-{
-    text-align: right;
-    font-size: 0.678rem;
-}
-
-article table
-{
-    border: 0.01rem solid #000000;
-    border-collapse: collapse;
-}
-
-table thead
-{
-    background-color: #000;
-    font-weight: bolder;
-    color: #fff;
-}
-
-table tbody
-{
-    word-break: break-all;
-}
-
-table tr, td
-{
-    border: 0.01rem solid #000000;
-    padding: 0.8rem;
-}
-
-table .large
-{
-    width: 100%;
-}
-
-table .table-container
-{
-    display: flex;
-    flex-flow: row nowrap;
-
-    justify-content: space-between;
-}
-
-table button
+select
 {
     border: none;
-    cursor: pointer;
-    background-color: #fff;
+    outline: none;
+    background-color: #E9ECEF;
 }
 
-table button:focus
+.account-settings .user-profile
 {
-    outline: 0;
-}
-
-.modal
-{
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 99999;
-    opacity: 0;
-    overflow: auto;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
-}
-
-.modal > div
-{
-    width: 30%;
-    position: relative;
-    margin: 10% auto;
-    padding: 15px 20px;
-    background: #fff;
-    border-radius: 5px;
-}
-
-.modal .closeModal
-{
-    position: absolute;
-    width: 30px;
-    right: -15px;
-    top: -20px;
-    margin-top: 5px;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: #b00013;
-}
-
-.modal h1
-{
-    padding: 1rem;
-    font-weight: 700;
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
     text-align: center;
-    letter-spacing: 0.09rem;
 }
 
-.modal li
+.account-settings .user-profile .user-avatar
 {
-    list-style: none;
-    padding: 0.1rem;
-}
-.modal button
-{
-    margin-top: 0.9rem;
-    background-color: #282828;
-    border: 0px;
-    border-radius: 4px;
-    padding: 0.54rem;
-    font-weight: 600;
-    font-size: 0.93rem;
-    color: #fff;
+    margin: 0 0 1rem 0;
 }
 
-.modal button:focus
+.account-settings .user-profile .user-avatar img
 {
-    outline: 0;
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
 }
 
-.modal input
+.account-settings .user-profile h5.user-name
 {
-    width: 50%;
-    padding: 0.5rem;
+    margin: 0 0 0.5rem 0;
 }
 
-.modal label
+.account-settings .user-profile h6.user-email
 {
+    margin: 0;
+    font-size: 0.8rem;
     font-weight: 400;
+    color: #9fa8b9;
 }
 
-@media screen and (max-width: 1024px)
+.account-settings .about
 {
-    nav
-    {
-        justify-content: center;
-    }
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
 
-    main
-    {
-        width: 95%;
-    }
+.account-settings .about h5
+{
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
 
-    .modal > div
-    {
-        width: 60%;
-    }
+.account-settings .about p
+{
+    font-size: 0.825rem;
+}
+
+i.bi-people-fill
+{
+    font-size: 5rem;
+}
+
+tr
+{
+    white-space: nowrap;
+}
+
+header
+{
+    background: url(../images/banner.jpg) center no-repeat;
+    background-size: cover;
+    padding: 100px;
+}
+
+footer
+{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 }

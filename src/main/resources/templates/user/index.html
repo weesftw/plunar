@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | User</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="~{/fragments/main :: navbar}"></nav>
+<div class="container pb-5">
+    <header class="rounded-bottom container mb-3"></header>
+    <main>
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header text-center fw-bolder">
+                        New User
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <form th:object="${userDTO}" class="row g-3 col-lg-5" method="POST" action="/user">
+                                <div class="mb-3 col-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input th:field="*{firstName}" th:errorclass="is-invalid" type="email" class="form-control" aria-describedby="emailHelp">
+                                    <div class="invalid-feedback" th:errors="*{firstName}"></div>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input th:field="*{lastName}" th:errorclass="is-invalid" type="text" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{lastName}"></div>
+                                </div>
+                                <div class="mb-3 col-12">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="example@example.com">
+                                    <div class="invalid-feedback" th:errors="*{email}"></div>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="phoneNumber" class="form-label">Phone</label>
+                                    <input th:field="*{phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                                    <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="zipCode" class="form-label">Zip Code</label>
+                                    <input th:field="*{zipCode}" th:errorclass="is-invalid" type="text" class="form-control">
+                                    <div class="invalid-feedback" th:errors="*{zipCode}"></div>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                                    <div class="input-group-text">@</div>
+                                    <input th:field="*{username}" th:errorclass="is-invalid" type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+                                    <div class="invalid-feedback" th:errors="*{username}"></div>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control">
+                                    <div id="passwordHelpBlock" class="form-text">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                                    </div>
+                                    <div class="invalid-feedback" th:errors="*{password}"></div>
+                                </div>
+                                <div class="gutters text-end">
+                                    <a type="submit" href="/dashboard/index" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-danger">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted text-end"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="~{fragments/main :: footer}"></footer>
+<div th:replace="~{fragments/main :: script}"></div>
+</body>
+</html>

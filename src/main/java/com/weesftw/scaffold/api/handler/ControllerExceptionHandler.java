@@ -1,6 +1,6 @@
 package com.weesftw.scaffold.api.handler;
 
-import com.weesftw.scaffold.api.request.ExceptionResponse;
+import com.weesftw.scaffold.api.dto.ExceptionDTO;
 import com.weesftw.scaffold.domain.exception.UserNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler
                                                                          WebRequest request)
     {
         return super.handleExceptionInternal(ex,
-                ExceptionResponse
+                ExceptionDTO
                         .builder()
                         .time(OffsetDateTime.now())
                         .errorCode(HttpStatus.NOT_FOUND.value())
@@ -38,7 +38,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler
                                                                   WebRequest request)
     {
         return super.handleExceptionInternal(ex,
-                ExceptionResponse
+                ExceptionDTO
                     .builder()
                     .time(OffsetDateTime.now())
                     .errorCode(status.value())

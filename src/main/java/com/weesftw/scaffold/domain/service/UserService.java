@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class UserService
         return userRepository.findAll();
     }
 
-    public User findById(String id)
+    public User findById(UUID id)
     {
         return userRepository
                 .findById(id)
@@ -33,11 +34,7 @@ public class UserService
         return userRepository.save(user);
     }
 
-    public void deleteById(String id)
-    {
-        userRepository.delete(findById(id));
-    }
-
+    @Transactional
     public void delete(User user)
     {
         userRepository.delete(user);
