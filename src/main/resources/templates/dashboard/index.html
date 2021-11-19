@@ -31,33 +31,31 @@
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col" class="text-center">#</th>
-                                                    <th scope="col">Username</th>
                                                     <th scope="col">Full Name</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Phone</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">Zip Code</th>
+                                                    <th scope="col">Reason</th>
+                                                    <th scope="col" class="text-center">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody th:each="member : ${members}">
                                                 <tr>
                                                     <th scope="row">
-                                                        <p class="text-limit">
-                                                            ${user.id}
-                                                        </p>
+                                                        <p th:text="${member.id}" class="text-limit text-center"></p>
                                                     </th>
-                                                    <td>${user.username}</td>
-                                                    <td>${user.firstName} ${user.lastName}</td>
+                                                    <td th:text="${member.firstName} + ' ' + ${member.lastName}"></td>
                                                     <td>
-                                                        <p class="text-limit">
-                                                            ${user.email}
-                                                        </p>
+                                                        <p th:text="${member.email}" class="text-limit"></p>
                                                     </td>
-                                                    <td>${user.phoneNumber}</td>
-                                                    <td>
-                                                        <a class="btn btn-secondary" role="button" href="${pageContext.request.contextPath}/user/?patch=${user.id}">
+                                                    <td th:text="${member.phoneNumber}"></td>
+                                                    <td th:text="${member.zipCode}"></td>
+                                                    <td class="text-break text-wrap" th:text="${member.reason}"></td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-secondary" role="button" th:href="@{'/member/?patch=' + ${member.id}}">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
-                                                        <a class="btn btn-secondary" role="button" href="${pageContext.request.contextPath}/user/?delete=${user.id}">
+                                                        <a class="btn btn-secondary" role="button" th:href="@{'/member/?delete=' + ${member.id}}">
                                                             <i class="bi bi-trash"></i>
                                                         </a>
                                                     </td>
@@ -85,33 +83,33 @@
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col" class="text-center">#</th>
-                                                    <th scope="col">Username</th>
                                                     <th scope="col">Full Name</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Phone</th>
+                                                    <th scope="col">Zip Code</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Username</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody th:each="user : ${users}">
                                                 <tr>
                                                     <th scope="row">
-                                                        <p class="text-limit">
-                                                            ${user.id}
-                                                        </p>
+                                                        <p th:text="${user.uuid}" class="text-limit"></p>
                                                     </th>
-                                                    <td>${user.username}</td>
-                                                    <td>${user.firstName} ${user.lastName}</td>
+                                                    <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
                                                     <td>
-                                                        <p class="text-limit">
-                                                            ${user.email}
-                                                        </p>
+                                                        <p th:text="${user.email}" class="text-limit"></p>
                                                     </td>
-                                                    <td>${user.phoneNumber}</td>
+                                                    <td th:text="${user.phoneNumber}"></td>
+                                                    <td th:text="${user.zipCode}"></td>
+                                                    <td th:text="${user.description}"></td>
+                                                    <td th:text="${user.username}"></td>
                                                     <td>
-                                                        <a class="btn btn-secondary" role="button" href="${pageContext.request.contextPath}/user/?patch=${user.id}">
+                                                        <a class="btn btn-secondary" role="button" th:href="@{'/user/?patch=' + ${user.uuid}}">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
-                                                        <a class="btn btn-secondary" role="button" href="${pageContext.request.contextPath}/user/?delete=${user.id}">
+                                                        <a class="btn btn-secondary" role="button" th:href="@{'/user/?delete=' + ${user.uuid}}">
                                                             <i class="bi bi-trash"></i>
                                                         </a>
                                                     </td>
