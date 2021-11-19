@@ -17,39 +17,41 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <form th:object="${memberDTO}" method="POST" action="/member">
-                                <div class="mb-3">
-                                    <label for="firstName" class="form-label">First Name</label>
-                                    <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" aria-describedby="emailHelp">
+                            <form th:object="${memberDTO}" class="row g-1 col-lg-5" method="POST" action="/member">
+                                <div class="mb-3 col-6 form-floating">
+                                    <input th:field="*{firstName}" th:value="${firstName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="First Name">
+                                    <label for="firstName">First Name</label>
                                     <div class="invalid-feedback" th:errors="*{firstName}"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="lastName" class="form-label">Last Name</label>
-                                    <input th:field="*{lastName}" th:errorclass="is-invalid" type="text" class="form-control">
+                                <div class="mb-3 col-6 form-floating">
+                                    <input th:field="*{lastName}" th:value="${lastName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Last Name">
+                                    <label for="lastName">Last Name</label>
                                     <div class="invalid-feedback" th:errors="*{lastName}"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">E-mail</label>
-                                    <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control">
+                                <div class="mb-3 form-floating">
+                                    <input th:field="*{email}" th:value="${email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="example@example.com">
+                                    <label for="email">E-mail</label>
                                     <div class="invalid-feedback" th:errors="*{email}"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="phoneNumber" class="form-label">Phone</label>
-                                    <input th:field="*{phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control">
+                                <div class="mb-3 col-6 form-floating">
+                                    <input th:field="*{phoneNumber}" th:value="${phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                                    <label for="phoneNumber">Phone</label>
                                     <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="zipCode" class="form-label">Zip Code</label>
-                                    <input th:field="*{zipCode}" th:errorclass="is-invalid" type="text" class="form-control">
+                                <div class="mb-3 col-6 form-floating">
+                                    <input th:field="*{zipCode}" th:value="${zipCode}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="xxxxx-xxx">
+                                    <label for="zipCode">Zip Code</label>
                                     <div class="invalid-feedback" th:errors="*{zipCode}"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="reason" class="form-label">Reason</label>
-                                    <textarea th:field="*{reason}" th:errorclass="is-invalid" type="text" class="form-control"></textarea>
+                                <div class="mb-3 form-floating">
+                                    <textarea th:field="*{reason}" th:value="${reason}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Description"></textarea>
+                                    <label for="reason">Reason</label>
                                     <div class="invalid-feedback" th:errors="*{reason}"></div>
                                 </div>
-                                <a type="submit" href="/dashboard/index" class="btn btn-secondary">Cancel</a>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="gutters text-end">
+                                    <a type="submit" href="/dashboard/index" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-danger">Save</button>
+                                </div>
                             </form>
                         </div>
                     </div>
