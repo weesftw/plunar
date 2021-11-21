@@ -28,6 +28,4 @@ public class ProfileDTO
     @NotBlank(message = "Username cannot be empty.")
     @Size(min = 5, message = "Username must be greater than five characters.")
     private String username;
-    @Size(min = 5, message = "Password is weak.")
-    private String password;
 }
