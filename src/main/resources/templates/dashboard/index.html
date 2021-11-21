@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | Dashboard</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{/fragments/main :: navbar}"></nav>
+    <div class="container pb-5">
+        <header class="rounded-bottom container mb-3"></header>
+        <main>
+            <div class="col">
+                <nav class="mb-3">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member" aria-selected="true">Members</button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-account" type="button" role="tab" aria-controls="nav-account" aria-selected="false">Users</button>
+                        <button class="nav-link ms-auto" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Your Profile</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
+                        <div th:replace="~{/fragments/dashboard :: member}"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                        <div th:replace="~{/fragments/dashboard :: user}"></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="col d-flex justify-content-center">
+                            <div class="card col-lg-5 text-center shadow">
+                                <div th:replace="~{/fragments/dashboard :: profile}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{/fragments/main :: footer}"></footer>
+    <div th:replace="~{/fragments/main :: script}"></div>
+</body>
+</html>

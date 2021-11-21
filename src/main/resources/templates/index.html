@@ -1,107 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments/common :: head">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | Index</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
 </head>
-<body>
-    <header>
-        <nav th:replace="fragments/common :: nav"></nav>
-    </header>
-    <main>
-        <section class="alert" th:if="${exception}">
-            <h2>Errors has found: </h2>
-            <p th:text="${exception}">Name Error</p>
-        </section>
-        <section>
-            <button type="button" onclick="onCreate(this.id)" id="create">New</button>
-        </section>
-        <article>
-            <table>
-                <thead>
-                    <tr>
-                        <td>#</td>
-                        <td class="large">Name</td>
-                        <td>Actions</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.name}"></td>
-                        <td>
-                            <div class="table-container">
-                                <button id="edit" onclick="onCreate(this.id, this.value)" th:value="${user.id}">
-                                    <span class="material-icons">edit</span>
-                                </button>
-                                <button id="delete" onclick="onCreate(this.id, this.value)" th:value="${user.id}"
-                                        th:href="@{/delete/{id} (id=${user.id})}">
-                                    <span class="material-icons">delete</span>
-                                </button>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{/fragments/main :: navbar}"></nav>
+    <div class="container pb-5">
+        <header class="rounded-bottom container mb-3"></header>
+        <main>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="card col-lg-5 shadow text-center">
+                        <div class="card-header fw-bolder">
+                            Members
+                        </div>
+                        <div class="card-body">
+                            <div class="counter-box colored">
+                                <i class="bi bi-people-fill"></i>
+                                <p><span th:text="${counter}" class="counter fw-bold"></span> Members Registered</br>
+                                    To go to the moon with us.
+                                </p>
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article>
-            <p>Made by Wesley Soares.</p>
-        </article>
-    </main>
-    <div id="createModal" class="modal">
-        <div>
-            <button type="button" onclick="onCreate(this.id)" class="closeModal" id="createCloseModal">X</button>
-            <form method="post" th:action="@{/}" th:object="${createUser}">
-                <h1>CREATE NEW USER</h1>
-                <ol>
-                    <li>
-                        <label for="create_name">Name:</label>
-                    </li>
-                    <li>
-                        <input type="text" id="create_name" placeholder="Insert your name here." th:field="*{name}">
-                    </li>
-                    <li>
-                        <button type="submit">Submit</button>
-                    </li>
-                </ol>
-            </form>
-        </div>
+                            <a href="/member" class="btn btn-danger fw-bold">Register Now</a>
+                        </div>
+                        <div class="card-footer text-muted text-end">Last update: 2 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <div id="editModal" class="modal">
-        <div>
-            <button type="button" class="closeModal" id="editCloseModal">X</button>
-            <form method="post" th:action="@{|/*{id}|}" th:object="${user}">
-                <h1>EDIT USER: <span th:text="*{name}"></span></h1>
-                <input type="hidden" id="edit_id" th:field="*{id}" th:value="*{id}" />
-                <ol>
-                    <li>
-                        <label for="edit_name">Name:</label>
-                    </li>
-                    <li>
-                        <input type="text" id="edit_name" th:field="*{name}" th:value="*{name}">
-                    </li>
-                    <li>
-                        <button type="submit">Submit</button>
-                    </li>
-                </ol>
-            </form>
-        </div>
-    </div>
-    <div id="deleteModal" class="modal">
-        <div>
-            <button type="button" onclick="onCreate(this.id)" class="closeModal" id="deleteCloseModal">X</button>
-            <form method="post" th:action="@{|/delete/*{id}|}" th:object="${user}">
-                <h1>DELETE USER: <span id="delete_name"></span></h1>
-                <input type="hidden" id="delete_id" th:field="*{id}" />
-                <ol>
-                    <li>
-                        <label>Ok?</label>
-                    </li>
-                    <li>
-                        <button type="submit">Yes</button>
-                    </li>
-                </ol>
-            </form>
-        </div>
-    </div>
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+    <div th:replace="~{fragments/main :: script}"></div>
 </body>
 </html>

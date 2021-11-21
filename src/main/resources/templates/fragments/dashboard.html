@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<body>
+    <th:block th:fragment="member">
+        <div class="card text-center shadow">
+            <div class="card-header fw-bolder"></div>
+            <div class="card-body" style="text-align: left;">
+                <a href="/member" type="button" class="btn btn-danger mb-3">
+                    New
+                </a>
+                <div class="align-items-center" id="member">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col" class="text-center">#</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Zip Code</th>
+                                <th scope="col">Reason</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="member : ${members}">
+                            <tr>
+                                <th scope="row">
+                                    <p th:text="${member.id}" class="text-limit text-center"></p>
+                                </th>
+                                <td th:text="${member.firstName} + ' ' + ${member.lastName}"></td>
+                                <td>
+                                    <p th:text="${member.email}" class="text-limit"></p>
+                                </td>
+                                <td th:text="${member.phoneNumber}"></td>
+                                <td th:text="${member.zipCode}"></td>
+                                <td class="text-break text-wrap" th:text="${member.reason}"></td>
+                                <td class="text-center">
+                                    <a class="btn btn-secondary" role="button" th:href="@{'/member/' + ${member.id}}">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-secondary" role="button" th:href="@{'/member/delete/' + ${member.id}}">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-end">
+                Last update: 2 days ago
+            </div>
+        </div>
+    </th:block>
+    <th:block th:fragment="user">
+        <div class="card text-center shadow">
+            <div class="card-header fw-bolder"></div>
+            <div class="card-body" style="text-align: left;">
+                <a href="/account" type="button" class="btn btn-danger mb-3">
+                    New
+                </a>
+                <div class="align-items-center" id="account">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col" class="text-center">#</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Zip Code</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="account : ${users}">
+                            <tr>
+                                <th scope="row">
+                                    <p th:text="${account.uuid}" class="text-limit"></p>
+                                </th>
+                                <td th:text="${account.firstName} + ' ' + ${account.lastName}"></td>
+                                <td>
+                                    <p th:text="${account.email}" class="text-limit"></p>
+                                </td>
+                                <td th:text="${account.phoneNumber}"></td>
+                                <td th:text="${account.zipCode}"></td>
+                                <td th:text="${account.description}"></td>
+                                <td th:text="${account.username}"></td>
+                                <td>
+                                    <a class="btn btn-secondary" role="button" th:href="@{'/account/' + ${account.uuid}}">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-secondary" role="button" th:href="@{'/account/delete/' + ${account.uuid}}">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-end">
+                Last update: 2 days ago
+            </div>
+        </div>
+    </th:block>
+    <th:block th:fragment="profile">
+        <div class="card-header fw-bolder"></div>
+        <div class="card-body">
+            <div class="card-body">
+                <div class="account-settings">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                        </div>
+                        <h5 class="user-name" th:text="${#authentication.principal.account.firstName} + ' ' + ${#authentication.principal.account.lastName}"></h5>
+                        <h6 class="user-email" th:text="${#authentication.principal.account.email}"></h6>
+                    </div>
+                    <div class="about">
+                        <h5 class="text-danger">About</h5>
+                        <p th:text="${#authentication.principal.account.description}"></p>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <a href="/profile" class="btn btn-danger">Edit</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-end">
+            Last update: 2 days ago
+        </div>
+    </th:block>
+</body>
+</html>

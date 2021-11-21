@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | Login</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{/fragments/main :: navbar}"></nav>
+    <div class="container pb-5">
+        <header class="rounded-bottom container mb-3"></header>
+        <main>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header text-center fw-bolder">
+                            Sign in
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <form method="POST" th:action="@{/login}">
+                                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                                        Wrong username or password.
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input name="username" id="username" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input name="password" id="password" type="password" class="form-control">
+                                        <div id="emailHelp" class="form-text">We'll never share your password with anyone else.</div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-danger">Sign In</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted text-end"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+    <div th:replace="~{fragments/main :: script}"></div>
+</body>
+</html>

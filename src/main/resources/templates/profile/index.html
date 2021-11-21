@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Plunar | Account</title>
+    <div th:replace="~{/fragments/main :: head}"></div>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="~{/fragments/main :: navbar}"></nav>
+    <div class="container pb-5">
+        <header class="rounded-bottom container mb-3"></header>
+        <main>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header text-center fw-bolder">
+                            Your Profile
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <form th:object="${profileDTO}" class="row g-1 col-lg-5" method="POST" action="/profile">
+                                    <div class="mb-3 col-6 form-floating">
+                                        <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="First Name">
+                                        <label for="firstName">First Name</label>
+                                        <div class="invalid-feedback" th:errors="*{firstName}"></div>
+                                    </div>
+                                    <div class="mb-3 col-6 form-floating">
+                                        <input th:field="*{lastName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Last Name">
+                                        <label for="lastName">Last Name</label>
+                                        <div class="invalid-feedback" th:errors="*{lastName}"></div>
+                                    </div>
+                                    <div class="mb-3 col-12 form-floating">
+                                        <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="example@example.com">
+                                        <label for="email" class="form-label">E-mail</label>
+                                        <div class="invalid-feedback" th:errors="*{email}"></div>
+                                    </div>
+                                    <div class="mb-3 col-6 form-floating">
+                                        <input th:field="*{phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                                        <label for="phoneNumber">Phone</label>
+                                        <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+                                    </div>
+                                    <div class="mb-3 col-6 form-floating">
+                                        <input th:field="*{zipCode}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="xxxxx-xxx">
+                                        <label for="zipCode">Zip Code</label>
+                                        <div class="invalid-feedback" th:errors="*{zipCode}"></div>
+                                    </div>
+                                    <div class="mb-3 col-12 form-floating">
+                                        <textarea th:field="*{description}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="xxxxx-xxx"></textarea>
+                                        <label for="description">Description</label>
+                                    </div>
+                                    <div class="gutters text-end">
+                                        <a type="submit" href="/dashboard" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-danger">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted text-end"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+    <div th:replace="~{fragments/main :: script}"></div>
+</body>
+</html>
