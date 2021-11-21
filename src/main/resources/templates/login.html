@@ -17,17 +17,18 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <form th:object="${userDTO}" method="POST" action="/login">
+                                <form method="POST" th:action="@{/login}">
+                                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                                        Wrong username or password.
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" aria-describedby="emailHelp">
-                                        <div class="invalid-feedback" th:errors="*{email}"></div>
+                                        <label for="username" class="form-label">Username</label>
+                                        <input name="username" id="username" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control">
+                                        <input name="password" id="password" type="password" class="form-control">
                                         <div id="emailHelp" class="form-text">We'll never share your password with anyone else.</div>
-                                        <div class="invalid-feedback" th:errors="*{password}"></div>
                                     </div>
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-danger">Sign In</button>

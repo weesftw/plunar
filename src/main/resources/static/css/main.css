@@ -77,6 +77,17 @@ i.bi-people-fill
     font-size: 5rem;
 }
 
+.features-icons
+{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i
+{
+    font-size: 4.5rem;
+}
+
 tr
 {
     white-space: nowrap;

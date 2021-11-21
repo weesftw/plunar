@@ -2,16 +2,13 @@ package com.weesftw.scaffold.domain.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User
+@Table(name = "accounts")
+public class Account
 {
     @Id
     private UUID uuid;
@@ -25,4 +22,9 @@ public class User
     @Column(unique = true)
     private String username;
     private String password;
+
+    private boolean isEnable;
+
+    @ManyToOne
+    private Group group;
 }

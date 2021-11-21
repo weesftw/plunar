@@ -1,7 +1,7 @@
 package com.weesftw.scaffold.api.handler;
 
 import com.weesftw.scaffold.api.dto.ExceptionDTO;
-import com.weesftw.scaffold.domain.exception.UserNotFoundException;
+import com.weesftw.scaffold.domain.exception.AccountNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler
 {
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex,
-                                                                         WebRequest request)
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(AccountNotFoundException ex,
+                                                              WebRequest request)
     {
         return super.handleExceptionInternal(ex,
                 ExceptionDTO

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>Plunar | User</title>
+    <title>Plunar | Account</title>
     <div th:replace="~{/fragments/main :: head}"></div>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -17,47 +17,44 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <form th:object="${userDTO}" class="row g-1 col-lg-5" method="POST" action="/user">
+                                <form th:object="${accountDTO}" class="row g-1 col-lg-5" method="POST" th:action="'/account' + ${id != null ? '/' + id : ''}">
                                     <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{firstName}" th:value="${firstName}" th:errorclass="is-invalid" type="email" class="form-control" aria-describedby="emailHelp" placeholder="First Name">
+                                        <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="First Name">
                                         <label for="firstName">First Name</label>
                                         <div class="invalid-feedback" th:errors="*{firstName}"></div>
                                     </div>
                                     <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{lastName}" th:value="${lastName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Last Name">
+                                        <input th:field="*{lastName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Last Name">
                                         <label for="lastName">Last Name</label>
                                         <div class="invalid-feedback" th:errors="*{lastName}"></div>
                                     </div>
                                     <div class="mb-3 col-12 form-floating">
-                                        <input th:field="*{email}" th:value="${email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="example@example.com">
+                                        <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="example@example.com">
                                         <label for="email" class="form-label">E-mail</label>
                                         <div class="invalid-feedback" th:errors="*{email}"></div>
                                     </div>
                                     <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{phoneNumber}" th:value="${phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                                        <input th:field="*{phoneNumber}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
                                         <label for="phoneNumber">Phone</label>
                                         <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
                                     </div>
                                     <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{zipCode}" th:value="${zipCode}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="xxxxx-xxx">
+                                        <input th:field="*{zipCode}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="xxxxx-xxx">
                                         <label for="zipCode">Zip Code</label>
                                         <div class="invalid-feedback" th:errors="*{zipCode}"></div>
                                     </div>
+                                    <div class="mb-3 col-12 form-floating">
+                                        <textarea th:field="*{description}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Description"></textarea>
+                                        <label for="description">Description</label>
+                                        <div class="invalid-feedback" th:errors="*{description}"></div>
+                                    </div>
                                     <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{username}" th:value="${username}" th:errorclass="is-invalid" type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+                                        <input th:field="*{username}" th:errorclass="is-invalid" type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
                                         <label for="username">Username</label>
                                         <div class="invalid-feedback" th:errors="*{username}"></div>
                                     </div>
-                                    <div class="mb-3 col-6 form-floating">
-                                        <input th:field="*{password}" th:value="${password}" th:errorclass="is-invalid" type="password" class="form-control" placeholder="Password">
-                                        <label for="password">Password</label>
-                                        <div id="passwordHelpBlock" class="form-text">
-                                            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                                        </div>
-                                        <div class="invalid-feedback" th:errors="*{password}"></div>
-                                    </div>
                                     <div class="gutters text-end">
-                                        <a type="submit" href="/dashboard/index" class="btn btn-secondary">Cancel</a>
+                                        <a type="submit" href="/dashboard" class="btn btn-secondary">Cancel</a>
                                         <button type="submit" class="btn btn-danger">Save</button>
                                     </div>
                                 </form>

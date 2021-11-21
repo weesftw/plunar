@@ -5,7 +5,7 @@ $(document).ready(function()
         $(this).prop('Counter',0).animate({
             Counter: $(this).text()
         }, {
-            duration: 90000,
+            duration: 3000,
             easing: 'swing',
             step: function (now)
             {
@@ -13,5 +13,9 @@ $(document).ready(function()
             }
         });
     });
-
 });
+
+function activaTab(tab)
+{
+    $('.nav a[href="#' + tab + '"]').tab('show');
+};

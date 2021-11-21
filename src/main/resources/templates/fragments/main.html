@@ -3,7 +3,7 @@
 <head>
     <th:block layout:fragment="head">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, account-scalable=no">
 
         <link th:href="@{/css/main.css}" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"
@@ -16,11 +16,25 @@
     <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Plunar</a>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="btn btn-danger" href="/login">Sign In</a>
-                </li>
-            </ul>
+            <div sec:authorize="isAuthenticated()">
+                <div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome, <span sec:authentication="name"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <form id="form-logout" th:action="@{/logout}" method="post">
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <a class="btn btn-danger" href="login">Sign In</a>
+            </div>
         </div>
     </nav>
     <footer th:fragment="footer" class="footer bg-dark mt-auto">

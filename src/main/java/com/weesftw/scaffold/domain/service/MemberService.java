@@ -15,12 +15,17 @@ public class MemberService
 {
     private final MemberRepository repository;
 
-    public List<Member> getAll()
+    public List<Member> findAll()
     {
         return repository.findAll();
     }
 
-    public Member getById(Integer id) throws MemberNotFoundException
+    public long getCount()
+    {
+        return repository.count();
+    }
+
+    public Member findById(Integer id) throws MemberNotFoundException
     {
         return repository.findById(id)
                 .orElseThrow(() -> new MemberNotFoundException("ID: " + id + " not found."));
