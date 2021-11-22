@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <form th:object="${accountDTO}" class="row g-2 col-lg-5" method="POST" th:action="'/account' + ${id != null ? '/' + id : ''}">
+                                <form th:object="${accountDTO}" class="row g-2 col-lg-5" method="POST" th:action="@{'/account' + ${id != null ? '/' + id : ''}}">
                                     <div class="mb-3 col-6 form-floating">
                                         <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="First Name">
                                         <label for="firstName">First Name</label>

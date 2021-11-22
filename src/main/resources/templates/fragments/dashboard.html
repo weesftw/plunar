@@ -5,7 +5,7 @@
         <div class="card text-center shadow">
             <div class="card-header fw-bolder"></div>
             <div class="card-body" style="text-align: left;">
-                <a href="/member" type="button" class="btn btn-danger mb-3">
+                <a th:href="@{/member}" type="button" class="btn btn-danger mb-3">
                     New
                 </a>
                 <div class="align-items-center" id="member">
@@ -55,7 +55,7 @@
         <div class="card text-center shadow">
             <div class="card-header fw-bolder"></div>
             <div class="card-body" style="text-align: left;">
-                <a href="/account" type="button" class="btn btn-danger mb-3">
+                <a th:href="@{/account}" type="button" class="btn btn-danger mb-3">
                     New
                 </a>
                 <div class="align-items-center" id="account">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <a href="/profile" class="btn btn-danger">Edit</a>
+                    <a th:href="@{/profile}" class="btn btn-danger">Edit</a>
                 </div>
             </div>
         </div>
