@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <form th:object="${accountDTO}" class="row g-1 col-lg-5" method="POST" th:action="'/account' + ${id != null ? '/' + id : ''}">
+                                <form th:object="${accountDTO}" class="row g-2 col-lg-5" method="POST" th:action="'/account' + ${id != null ? '/' + id : ''}">
                                     <div class="mb-3 col-6 form-floating">
                                         <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="First Name">
                                         <label for="firstName">First Name</label>
@@ -48,10 +48,28 @@
                                         <label for="description">Description</label>
                                         <div class="invalid-feedback" th:errors="*{description}"></div>
                                     </div>
-                                    <div class="mb-3 col-6 form-floating">
+                                    <div class="mb-3 col-4 form-floating">
                                         <input th:field="*{username}" th:errorclass="is-invalid" type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
                                         <label for="username">Username</label>
                                         <div class="invalid-feedback" th:errors="*{username}"></div>
+                                    </div>
+                                    <div th:if="${newAccount}" class="mb-3 col-4 form-floating">
+                                        <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control" placeholder="Password">
+                                        <label for="password">Password</label>
+                                        <div class="invalid-feedback" th:errors="*{password}"></div>
+                                    </div>
+                                    <div class="mb-3 col-4 form-floating">
+                                        <select th:field="*{group}" name="group" class="form-select" id="inlineFormCustomSelect">
+                                            <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
+                                        </select>
+                                        <label for="group">Group</label>
+                                        <div class="invalid-feedback" th:errors="*{group}"></div>
+                                    </div>
+                                    <div class="mb-3 col-4 form-floating">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" th:field="*{isEnable}" th:checked="${isEnable}">
+                                            <label class="form-check-label" for="isEnable">Enable</label>
+                                        </div>
                                     </div>
                                     <div class="gutters text-end">
                                         <a type="submit" href="/dashboard" class="btn btn-secondary">Cancel</a>

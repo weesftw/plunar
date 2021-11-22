@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Data
@@ -24,8 +23,4 @@ public class ProfileDTO
     @NotBlank(message = "Field can't be blank.")
     private String zipCode;
     private String description;
-
-    @NotBlank(message = "Username cannot be empty.")
-    @Size(min = 5, message = "Username must be greater than five characters.")
-    private String username;
 }

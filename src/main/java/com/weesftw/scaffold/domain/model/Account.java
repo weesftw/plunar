@@ -1,12 +1,14 @@
 package com.weesftw.scaffold.domain.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Data
 @Entity
+@ToString
 @Table(name = "accounts")
 public class Account
 {

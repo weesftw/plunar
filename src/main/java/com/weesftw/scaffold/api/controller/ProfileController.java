@@ -1,18 +1,20 @@
 package com.weesftw.scaffold.api.controller;
 
 import com.weesftw.scaffold.api.config.UserDetailsImpl;
+import com.weesftw.scaffold.api.config.UserDetailsServiceImpl;
 import com.weesftw.scaffold.api.dto.ProfileDTO;
 import com.weesftw.scaffold.domain.model.Account;
 import com.weesftw.scaffold.domain.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +40,10 @@ public class ProfileController
                 .getPrincipal())
                 .getAccount();
 
+        Account account = service.findById(principal.getUuid());
+
         ProfileDTO dto = new ProfileDTO();
-        BeanUtils.copyProperties(principal, dto);
+        BeanUtils.copyProperties(account, dto);
 
         return new ModelAndView("profile/index")
                 .addObject(dto);
@@ -51,9 +55,28 @@ public class ProfileController
         if(result.hasErrors())
             return new ModelAndView("profile/index");
 
-        service.save(toEntity(profileDTO));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Account account = ((UserDetailsImpl) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal())
+                .getAccount();
 
-        return new ModelAndView("dashboard/index");
+        BeanUtils.copyProperties(profileDTO, account);
+
+        UserDetailsImpl userDetailsService = new UserDetailsImpl(account);
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(
+                        userDetailsService,
+                        userDetailsService.getPassword(),
+                        userDetailsService.getAuthorities())
+        );
+
+        System.out.println("account: " + userDetailsService.getPassword());
+
+        service.save(account);
+
+        return new ModelAndView("redirect:/dashboard");
     }
 
     private Account toEntity(ProfileDTO profileDTO)

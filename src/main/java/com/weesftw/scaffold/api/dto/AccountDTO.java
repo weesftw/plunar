@@ -1,9 +1,11 @@
 package com.weesftw.scaffold.api.dto;
 
+import com.weesftw.scaffold.domain.model.Group;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
@@ -28,4 +30,12 @@ public class AccountDTO
     @NotBlank(message = "Username cannot be empty.")
     @Size(min = 5, message = "Username must be greater than five characters.")
     private String username;
+    @NotBlank(message = "Password cannot be empty.")
+    @Size(min = 5, message = "Password must be greater than five characters.")
+    private String password;
+
+    private Boolean isEnable;
+
+    @NotNull
+    private Group group;
 }
