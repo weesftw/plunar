@@ -1,50 +1,33 @@
 package com.weesftw.scaffold.api.handler;
 
-import com.weesftw.scaffold.api.dto.ExceptionDTO;
 import com.weesftw.scaffold.domain.exception.AccountNotFoundException;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import com.weesftw.scaffold.domain.exception.MemberNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.time.OffsetDateTime;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
-public class ControllerExceptionHandler extends ResponseEntityExceptionHandler
+public class ControllerExceptionHandler
 {
-    @ExceptionHandler(AccountNotFoundException.class)
-    public ResponseEntity<Object> handleUserNotFoundException(AccountNotFoundException ex,
-                                                              WebRequest request)
+    @ResponseBody
+    @ExceptionHandler(MemberNotFoundException.class)
+    public Object handleMemberNotFoundException()
     {
-        return super.handleExceptionInternal(ex,
-                ExceptionDTO
-                        .builder()
-                        .time(OffsetDateTime.now())
-                        .errorCode(HttpStatus.NOT_FOUND.value())
-                        .description(ex.getMessage())
-                        .build(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return new ModelAndView("redirect:/dashboard");
     }
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request)
+    @ResponseBody
+    @ExceptionHandler(AccountNotFoundException.class)
+    public Object handleAccountNotFoundException()
     {
-        return super.handleExceptionInternal(ex,
-                ExceptionDTO
-                    .builder()
-                    .time(OffsetDateTime.now())
-                    .errorCode(status.value())
-                    .description("One or more errors has found.")
-                    .errors(ex.getBindingResult().getAllErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList()))
-                    .build(), headers, status, request);
+        return new ModelAndView("redirect:/dashboard");
+    }
+
+    @ResponseBody
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Object handleIllegalArgumentException()
+    {
+        return new ModelAndView("redirect:/dashboard");
     }
 }
