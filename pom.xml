@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>com.weesftw</groupId>
-	<artifactId>scaffold</artifactId>
+	<artifactId>plunar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>scaffold</name>
+	<name>plunar</name>
 
 	<properties>
 		<java.version>17</java.version>
